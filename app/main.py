@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from app.schemas import UserCreate
+from app.schemas import ProductCreate, ResponseProduct
 
-app = FastAPI();
+app = FastAPI()
 
 @app.get('/')
 def home():
@@ -23,10 +23,13 @@ def hello(name):
         "Hello " + name
     }
 
-@app.post('/users')
-def create_user(user: UserCreate):
-    
-    return {
-        "message": "User Create Successfully",
-       
-    };
+# @app.post('/users', response_model=UserResponse)
+# def create_user(user: UserCreate):
+#     return {
+#         "message": "User Create Successfully",
+#         "user": user
+#     }
+
+@app.post('/products', response_model=ResponseProduct)
+def create_product(product: ProductCreate):
+    return product

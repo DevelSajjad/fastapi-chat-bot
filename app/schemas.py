@@ -1,7 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-class UserCreate(BaseModel):
-
+class ProductCreate(BaseModel):
     name: str
-    email: str
-    password: str
+    price: int
+    stock: int
+
+class ResponseProduct(BaseModel):
+    name: str
+    price: int
