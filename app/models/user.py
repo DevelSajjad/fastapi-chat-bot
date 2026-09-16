@@ -1,4 +1,4 @@
-import email
+
 from sqlalchemy import String, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database.base import Base
@@ -18,6 +18,6 @@ class User(Base):
         index=True
     )
 
-    password_hash: Mapped(str) = mapped_column(
+    password_hash: Mapped[str] = mapped_column(
         String(255)
     )
