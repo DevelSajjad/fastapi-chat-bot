@@ -1,6 +1,20 @@
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated = "auto"
+)
+
+def hash_password(password: str):
+
+    return pwd_context.hash(password)
+
+def verify_password(plainpassword, hashedpassword):
+
+    return pwd_context.verify(plainpassword, hashedpassword)
+
 def common_parameters():
 
     return {
-        "page": 1,
-        "limit": 10
+        'id': 1
     }
