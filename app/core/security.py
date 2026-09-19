@@ -7,11 +7,11 @@ pwd_context = CryptContext(
 
 def hash_password(password: str):
 
-    return pwd_context.hash(password[:72])
+    return pwd_context.hash(password)
 
 def verify_password(plainpassword, hashedpassword):
 
-    return pwd_context.verify(plainpassword[:72], hashedpassword)
+    return pwd_context.verify(plainpassword, hashedpassword)
 
 def common_parameters():
 

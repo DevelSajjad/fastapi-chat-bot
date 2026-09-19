@@ -18,8 +18,8 @@ def register(data:RegisterRequest, db:Session = Depends(get_db)):
 
     user = register_user(
         db,
-        data.full_name,
         data.email,
+        data.full_name,
         data.password
     )
 

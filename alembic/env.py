@@ -4,7 +4,6 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-
 from app.core.config import settings
 
 
@@ -23,6 +22,9 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from app.database.base import Base
 from app.models.user import User
+from app.models.ai_provider import AIProvider
+from app.models.conversation import Conversation
+from app.models.chat_message import ChatMessage
 target_metadata = Base.metadata
 
 config.set_main_option(
