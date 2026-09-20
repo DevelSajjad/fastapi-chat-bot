@@ -1,24 +1,29 @@
 from fastapi import Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer   
+from fastapi.security import OAuth2PasswordBearer, HTTPBearer, HTTPAuthorizationCredentials   
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 from app.database.dependency import get_db
 from app.models.user import User
+from app.core.config import settings
 
 
-SECRET_KEY = "your-secret-key-change-this"
+SECRET_KEY = settings.AUTH_SECRET_KEY
 ALGORITHM = "HS256"
 
 
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/auth/login"
-)
+# oauth2_scheme = OAuth2PasswordBearer(
+#     tokenUrl="/auth/login"
+# )
+
+security = HTTPBearer()
 
 def get_current_user(
-    token: str = Depends(oauth2_scheme),
+    # token: str = Depends(oauth2_scheme),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ):
 
+    token = credentials.credentials
     try:
 
         payload = jwt.decode(

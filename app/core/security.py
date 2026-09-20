@@ -1,17 +1,18 @@
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
+from app.core.config import settings
 
 pwd_context = CryptContext(
     schemes=["bcrypt"],
     deprecated = "auto"
 )
 
-SECRET_KEY = "your-secret-key-change-this"
+SECRET_KEY = settings.AUTH_SECRET_KEY 
 
 ALGORITHM = "HS256"
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES 
 
 def hash_password(password: str):
 
@@ -42,6 +43,6 @@ def create_access_token(data: dict):
 def common_parameters():
 
     return {
-        'id': 1
+        'id': 'test'
     }
     
