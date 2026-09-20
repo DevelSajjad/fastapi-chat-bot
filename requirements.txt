@@ -3,3 +3,10 @@ uvicorn
 pydantic-settings
 sqlalchemy
 pymysql
+alembic
+passlib==1.7.4
+bcrypt==4.0.1
+email-validator
+openai
+google-genai
+requests
