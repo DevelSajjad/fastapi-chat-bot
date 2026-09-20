@@ -10,3 +10,4 @@ email-validator
 openai
 google-genai
 requests
+python-jose[cryptography]

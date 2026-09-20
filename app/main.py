@@ -14,7 +14,7 @@ app = FastAPI(
     title = settings.APP_NAME
 )
 
-app.include_router(user_routes)
+# app.include_router(user_routes)
 
 app.include_router(auth_routes)
 app.include_router(ai_provider_routes)

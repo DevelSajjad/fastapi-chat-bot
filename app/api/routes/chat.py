@@ -5,6 +5,9 @@ from app.models.conversation import Conversation
 from app.models.chat_message import ChatMessage
 from app.schemas.chat import ConversationCreate, ChatRequest
 from app.services.chat_service import send_message
+from app.core.auth import get_current_user
+from app.models.user import User
+
 
 router = APIRouter(
     prefix="/chat",
@@ -14,12 +17,12 @@ router = APIRouter(
 @router.post("/conversation")
 def create_conversation(
     data:ConversationCreate,
+    current_user:User = Depends(get_current_user),
     db:Session=Depends(get_db)
 ):
 
-
     conversation = Conversation(
-        user_id=1, # temporary
+        user_id=current_user.id, 
         provider_id=data.provider_id,
         title=data.title
     )
