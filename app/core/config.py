@@ -4,8 +4,8 @@ class Settings(BaseSettings):
 
     APP_NAME: str
     DATABASE_URL: str
-    SECRET_KEY: str
-    OPENAI_API_KEY: str
+    AUTH_SECRET_KEY: str = "saktiman"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int=60
 
     class Config:
         env_file = '.env'
