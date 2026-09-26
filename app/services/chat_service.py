@@ -7,6 +7,7 @@ from app.models.chat_message import ChatMessage
 from app.models.ai_provider import AIProvider
 
 from app.services.ai_provider_client import generate_ai_response
+from app.services.document import rag_prompt
 
 
 
@@ -67,14 +68,14 @@ def send_message(
     db.commit()
 
 
-
+    prompt = rag_prompt(db, message)
 
     # Generate AI response
 
     answer = generate_ai_response(
         provider,
 
-        message
+        prompt
     )
 
 

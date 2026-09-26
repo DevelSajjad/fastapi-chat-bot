@@ -11,3 +11,10 @@ openai
 google-genai
 requests
 python-jose[cryptography]
+psycopg2-binary
+pgvector
+pypdf
+langchain
+langchain-text-splitters
+python-multipart
+sentence-transformers

@@ -25,6 +25,7 @@ from app.models.user import User
 from app.models.ai_provider import AIProvider
 from app.models.conversation import Conversation
 from app.models.chat_message import ChatMessage
+from app.models.document import Document
 target_metadata = Base.metadata
 
 config.set_main_option(
