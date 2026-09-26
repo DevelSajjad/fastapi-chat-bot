@@ -2,6 +2,8 @@ from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
 from sentence_transformers import SentenceTransformer
+from sqlalchemy.orm import Session
+from app.models.document import Document
 
 def extract_pdf(file):
     reader = PdfReader(file)
@@ -52,3 +54,41 @@ def create_embeddingTwo(text):
     embedding = model.encode(text)
 
     return embedding.tolist()
+
+
+def rag_prompt(
+    db,
+    message
+):
+
+    question_embedding = create_embeddingTwo(message)
+
+    documents = (
+        db.query(Document)
+        .order_by(
+            Document.embedding.cosine_distance(
+                question_embedding
+            )
+        )
+        .limit(5)
+        .all()
+    )
+
+
+    context = "\n\n".join(
+        document.content
+        for document in documents
+    )
+
+
+    prompt = f"""
+    Answer using only the following context.
+
+    Context:
+    {context}
+
+    Question:
+    {message}
+    """
+
+    return prompt
